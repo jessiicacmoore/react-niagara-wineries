@@ -1,0 +1,50 @@
+@import "./vars";
+
+*, *::before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $light-grey;
+  color: $dark-clr;
+
+  & * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+figure {
+  margin: 0;
+}
+
+ul.winery-list {
+  list-style: none;
+
+  li.winery {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    grid-gap: 1rem;
+    background-color: #fff;
+    margin: 1rem;
+
+    img {
+      width: 10rem;
+      height: 10rem;
+      object-fit: cover;
+    }
+
+    i {
+      color: $light-grey;
+      &.fill {
+        color: #c79a05;
+      }
+    }
+  }
+}
