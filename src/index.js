@@ -4,7 +4,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import "normalize.css"
-import './index.scss';
+import "./styles/index.scss"
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
