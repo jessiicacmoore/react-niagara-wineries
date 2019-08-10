@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function WineryRow({ winery }) {
+export default function WineryCard({ winery }) {
   const rating = Math.floor(winery.rating)
   return (
     <li className="winery">
