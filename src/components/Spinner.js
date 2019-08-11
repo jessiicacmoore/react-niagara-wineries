@@ -1,9 +1,9 @@
 import React from "react";
-import { Spin, Icon } from "antd";
 
 const Spinner = () => {
-  const antIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
-  return <Spin indicator={antIcon} />;
+  return (
+    <h1>Spinner coming soon</h1>
+  )
 };
 
 export default Spinner;

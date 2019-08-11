@@ -1,11 +1,12 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import Header from "../components/Header"
 import regions from "../components/regions"
 import Spinner from "../components/Spinner";
 import WineryList from "../components/WineryList"
 import PagesBtns from "../components/PagesBtns"
-import WineryDetail from "../components/WineryDetail"
+
 
 require("dotenv").config();
 
@@ -52,25 +53,21 @@ const WineriesListView = () => {
 
   return (
     <div>
-      <header>
-
-      </header>
-      <main className="wrapper">
+      <Header />
+      <main>
         {
           loading ?
           <Spinner />
           :
-          <Fragment>
-            <div className="winery-list-container">
-              <WineryList wineries={wineries} wineriesCount={wineriesCount}/>
-              {
-                pages > 1 ?
-                <PagesBtns pages={pages} handlePageChange={handlePageChange} activePage={activePage} />
-                :
-                ""
-              }
-            </div>
-          </Fragment>
+          <div className="wineries-list-container wrapper">
+            <WineryList wineries={wineries} wineriesCount={wineriesCount}/>
+            {
+              pages > 1 ?
+              <PagesBtns pages={pages} handlePageChange={handlePageChange} activePage={activePage} />
+              :
+              ""
+            }
+          </div>
         }
       </main>
     </div>
