@@ -50,16 +50,15 @@ const WineriesListView = () => {
     e.preventDefault();
     const newRegion = regions[inputValue];
     setLoading(true);
-    setWineries([]);
-    setRegion(newRegion);
-    setActivePage(1);
     setOffset(0);
-    getWineries();
+    setWineries([]);
+    setActivePage(1);
+    setRegion(newRegion);
   }
 
   useEffect(() => {
     getWineries();
-  }, [offset]);
+  }, [region, offset]);
 
   return (
     <div>
