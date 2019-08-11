@@ -23,9 +23,8 @@ const WineriesListView = () => {
   
   const getWineries = async () => {
     const token = process.env.REACT_APP_YELP_API_KEY;
-    const encodedRegion = encodeURIComponent(region);
-    const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=${limit}&offset=${offset}&location=${encodedRegion}&term=wineries/`;
-
+    const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=${limit}&offset=${offset}&location=${region.query}&term=wineries/`;
+    console.log("getting wineries")
     axios
       .get(`https://cors-anywhere.herokuapp.com/${baseUrl}`, {
         headers: {
@@ -42,25 +41,28 @@ const WineriesListView = () => {
       .catch(err => console.log(err));
   };
 
-  // const handlePageChange = (pageNum) => {
-  //   setOffset((pageNum-1)*limit);
-  //   setLoading(true);
-  //   setActivePage(pageNum);
-  //   console.log(activePage)
-  // }
-
-  const handleLoadWineries = () => {
+  const handleLoadMoreWineries = () => {
     setOffset(activePage*limit);
     setActivePage(activePage+1)
   }
 
+  const handleRegionChange = async (e, inputValue) => {
+    e.preventDefault();
+    const newRegion = regions[inputValue];
+    setLoading(true);
+    setOffset(0);
+    setWineries([]);
+    setActivePage(1);
+    setRegion(newRegion);
+  }
+
   useEffect(() => {
     getWineries();
-  }, [offset]);
+  }, [region, offset]);
 
   return (
     <div>
-      <Header />
+      <Header handleRegionChange={handleRegionChange}/>
       <main>
         {
           loading ?
@@ -72,7 +74,7 @@ const WineriesListView = () => {
               ""
               : 
               <div className="loader-container">
-                <Waypoint onEnter={handleLoadWineries}/>
+                <Waypoint onEnter={handleLoadMoreWineries}/>
                 <Loader />
               </div>
             }
