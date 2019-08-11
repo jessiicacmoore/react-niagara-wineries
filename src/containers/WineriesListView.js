@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Waypoint } from 'react-waypoint';
 
 import Header from "../components/Header"
 import regions from "../components/regions"
 import Spinner from "../components/Spinner";
+import Loader from "../components/Loader";
 import WineryList from "../components/WineryList"
-import PagesBtns from "../components/PagesBtns"
 
 
 require("dotenv").config();
@@ -18,8 +19,6 @@ const WineriesListView = () => {
   const [wineriesCount, setWineriesCount] = useState(0);
   const [activePage, setActivePage] = useState(1);
   const limit = 18;
-  const pages = Math.ceil(wineriesCount/limit)
-
 
   
   const getWineries = async () => {
@@ -34,21 +33,25 @@ const WineriesListView = () => {
         }
       })
       .then(resp => {
-        setWineries(resp.data.businesses);
         setWineriesCount(resp.data.total);
         setLoading(false);
-        console.log(resp.data.total)
-        console.log(pages)
+        const newData = resp.data.businesses;
+        const prevData = wineries;
+        setWineries([...prevData, ...newData])
       })
       .catch(err => console.log(err));
   };
 
-  const handlePageChange = (pageNum) => {
-    const newOffset = (pageNum - 1) * limit
-    setOffset((pageNum-1)*limit);
-    setLoading(true);
-    setActivePage(pageNum);
-    console.log(activePage)
+  // const handlePageChange = (pageNum) => {
+  //   setOffset((pageNum-1)*limit);
+  //   setLoading(true);
+  //   setActivePage(pageNum);
+  //   console.log(activePage)
+  // }
+
+  const handleLoadWineries = () => {
+    setOffset(activePage*limit);
+    setActivePage(activePage+1)
   }
 
   useEffect(() => {
@@ -65,11 +68,13 @@ const WineriesListView = () => {
           :
           <div className="wineries-list-container wrapper">
             <WineryList wineries={wineries} wineriesCount={wineriesCount}/>
-            {
-              pages > 1 ?
-              <PagesBtns pages={pages} handlePageChange={handlePageChange} activePage={activePage} />
-              :
+            {wineriesCount <= wineries.length ?
               ""
+              : 
+              <div className="loader-container">
+                <Waypoint onEnter={handleLoadWineries}/>
+                <Loader />
+              </div>
             }
           </div>
         }
