@@ -75,7 +75,9 @@ const WineriesListView = () => {
               : 
               <div className="loader-container">
                 <Waypoint onEnter={handleLoadMoreWineries}/>
-                <Loader />
+                <div className="loader-container">
+                  <Loader />
+                </div>
               </div>
             }
           </div>

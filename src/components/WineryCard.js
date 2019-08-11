@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom"
+import placeholderImg from "../img/placeholder.png"
 
 export default function WineryCard({ winery }) {
   const rating = Math.floor(winery.rating)
@@ -7,7 +8,7 @@ export default function WineryCard({ winery }) {
     <li className="winery">
       <Link to={`/${winery.id}`}>
         <div className="display-pic">
-          <img src={winery.image_url ? winery.image_url : "https://images.unsplash.com/photo-1507146426996-ef05306b995a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"} alt={winery.name} />
+          <img src={winery.image_url ? winery.image_url : placeholderImg} alt={winery.name} />
         </div>
         <div className="preview-content">
           <h2 className="winery-name">{winery.name}</h2>
