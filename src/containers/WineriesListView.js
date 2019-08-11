@@ -4,6 +4,8 @@ import axios from "axios";
 import regions from "../components/regions"
 import Spinner from "../components/Spinner";
 import WineryList from "../components/WineryList"
+import PagesBtns from "../components/PagesBtns"
+import WineryDetail from "../components/WineryDetail"
 
 require("dotenv").config();
 
@@ -13,13 +15,14 @@ const WineriesListView = () => {
   const [offset, setOffset] = useState(0);
   const [wineries, setWineries] = useState([]);
   const [wineriesCount, setWineriesCount] = useState(0);
-  const limit = 10;
+  const [activePage, setActivePage] = useState(1);
+  const limit = 18;
   const pages = Math.ceil(wineriesCount/limit)
   
   const getWineries = async () => {
     const token = process.env.REACT_APP_YELP_API_KEY;
     const encodedRegion = encodeURIComponent(region);
-    const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=${limit}&offset=${offset}&location=${encodedRegion}&term=wineries/`;
+    const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=${limit}&offset=${offset}&location=${encodedRegion}&term=winery/`;
 
     axios
       .get(`https://cors-anywhere.herokuapp.com/${baseUrl}`, {
@@ -39,6 +42,8 @@ const WineriesListView = () => {
     const newOffset = (pageNum - 1) * limit
     setOffset((pageNum-1)*limit);
     setLoading(true);
+    setActivePage(pageNum);
+    console.log(activePage)
   }
 
   useEffect(() => {
@@ -47,15 +52,24 @@ const WineriesListView = () => {
 
   return (
     <div>
-      <main>
-        <h1>Pages: {pages}</h1>
+      <header>
+
+      </header>
+      <main className="wrapper">
         {
           loading ?
           <Spinner />
           :
           <Fragment>
-            <h2>Wineries: {wineriesCount}</h2>
-            <WineryList wineries={wineries} wineriesCount={wineriesCount} pages={pages} handlePageChange={handlePageChange}/>
+            <div className="winery-list-container">
+              <WineryList wineries={wineries} wineriesCount={wineriesCount}/>
+              {
+                pages > 1 ?
+                <PagesBtns pages={pages} handlePageChange={handlePageChange} activePage={activePage} />
+                :
+                ""
+              }
+            </div>
           </Fragment>
         }
       </main>
