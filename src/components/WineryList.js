@@ -8,7 +8,7 @@ const WineryList = ({wineries}) => {
   return (
     <ul className="wineries">
       {
-        wineries.map(winery => <Fade bottom><WineryCard key={winery.id} winery={winery} /></Fade>)
+        wineries.map((winery, i)=> <Fade bottom key={i}><WineryCard key={winery.id} winery={winery} /></Fade>)
       }
     </ul>
   )

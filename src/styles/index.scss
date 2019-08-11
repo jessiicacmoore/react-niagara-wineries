@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Merriweather:400,900|Open+Sans:300,400,600&display=swap');
 @import "./vars";
 
-*, *::before, *:after {
+*,
+*::before,
+*:after {
   box-sizing: border-box;
 }
 
 body {
-  background-color: $light-grey;
+  background-color: $light-grey-clr;
   color: $dark-clr;
   font-family: $sans-serif;
 
@@ -34,7 +36,6 @@ figure {
 
 ul {
   list-style: none;
-
 }
 
 .wrapper {
@@ -45,7 +46,8 @@ ul {
 
 header {
   min-height: 55vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, .95) 93%), url('https://images.unsplash.com/photo-1517585867778-99d673b3a6c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80');
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.95) 93%),
+    url("https://images.unsplash.com/photo-1517585867778-99d673b3a6c1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top;
@@ -56,13 +58,18 @@ header {
 ul.wineries {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 1fr;
+  grid-gap: 2.25rem;
+  margin: 3rem 0;
 
   li.winery {
     background-color: #fff;
-    margin: 1rem;
     overflow: hidden;
-    border-radius: .75rem;
+    border-radius: .2rem;
+    -webkit-box-shadow: 10px 10px 46px -12px rgba(51,51,51,0.44);
+    -moz-box-shadow: 10px 10px 46px -12px rgba(51,51,51,0.44);
+    box-shadow: 10px 10px 46px -12px rgba(51,51,51,0.44);
+    height: 100%;
+    cursor: pointer;
 
     img {
       object-fit: cover;
@@ -72,10 +79,24 @@ ul.wineries {
 
     .preview-content {
       padding: 1rem;
+
+      .winery-name {
+        font-family: $serif;
+        font-weight: 400;
+        font-size: 1.2rem;
+      }
+      .location {
+        color: $mid-grey-clr;
+      }
     }
 
     i {
-      color: $light-grey;
+      color: $mid-grey-clr;
+      font-size: .8rem;
+
+      & + i {
+        padding-left: .5rem;
+      }
       &.fill {
         color: #c79a05;
       }
@@ -88,7 +109,8 @@ ul.pages {
   justify-content: flex-end;
   padding-right: 1em;
   li {
-    padding: .5rem .8rem;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
   }
 }
 
@@ -96,4 +118,4 @@ ul.pages {
   color: magenta;
 }
 
-@import './spinner'
+@import "./spinner";

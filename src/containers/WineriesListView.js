@@ -19,11 +19,13 @@ const WineriesListView = () => {
   const [activePage, setActivePage] = useState(1);
   const limit = 18;
   const pages = Math.ceil(wineriesCount/limit)
+
+
   
   const getWineries = async () => {
     const token = process.env.REACT_APP_YELP_API_KEY;
     const encodedRegion = encodeURIComponent(region);
-    const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=${limit}&offset=${offset}&location=${encodedRegion}&term=winery/`;
+    const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=${limit}&offset=${offset}&location=${encodedRegion}&term=wineries/`;
 
     axios
       .get(`https://cors-anywhere.herokuapp.com/${baseUrl}`, {
@@ -35,6 +37,8 @@ const WineriesListView = () => {
         setWineries(resp.data.businesses);
         setWineriesCount(resp.data.total);
         setLoading(false);
+        console.log(resp.data.total)
+        console.log(pages)
       })
       .catch(err => console.log(err));
   };

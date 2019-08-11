@@ -2,7 +2,7 @@ import React from "react";
 
 const Spinner = () => {
   return (
-    <div class="lds-default">
+    <div className="lds-default">
       <div />
       <div />
       <div />
