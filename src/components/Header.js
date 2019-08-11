@@ -6,7 +6,10 @@ const Header = ({handleRegionChange}) => {
   return (
     <header>
       <div className="wrapper">
-        <h1>Discover the Great Wines<br/>of the Niagara Region.</h1>
+        <div className="text-box">
+          <h1>Discover the Great Wines<br/>of the Niagara Region.</h1>
+          <p><span>Select a region to browse local wineries in the area,  or browse the wineries of the entire region.</span></p>
+        </div>
         <form onSubmit={(e) => handleRegionChange(e, regionEl.current.value)}>
           <label htmlFor="region-select" ariaLabel="Select a location"><i class="fas fa-map-marker-alt"></i></label>
           <div className="custom-select">
