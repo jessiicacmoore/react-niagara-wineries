@@ -11,10 +11,10 @@ const Header = ({handleRegionChange}) => {
           <p><span>Select a region to browse local wineries in the area,  or browse the wineries of the entire region.</span></p>
         </div>
         <form onSubmit={(e) => handleRegionChange(e, regionEl.current.value)}>
-          <label htmlFor="region-select" ariaLabel="Select a location"><i class="fas fa-map-marker-alt"></i></label>
+          <label htmlFor="region-select" aria-label="Select a location"><i className="fas fa-map-marker-alt"></i></label>
           <div className="custom-select">
             <select id="region-select" ref={regionEl}>
-              <option value="baseRegion" selected>Niagara Region</option>
+              <option value="baseRegion">Niagara Region</option>
               <option value="beamsville">Beamsville</option>
               <option value="jordanStn">Jordan Station</option>
               <option value="lincoln">Lincoln</option>
@@ -23,7 +23,7 @@ const Header = ({handleRegionChange}) => {
               <option value="stCath">St. Catharines</option>
               <option value="vineland">Vineland</option>
             </select>
-            <i class="fas fa-chevron-down"></i>
+            <i className="fas fa-chevron-down"></i>
           </div>
 
           <button type="submit">
