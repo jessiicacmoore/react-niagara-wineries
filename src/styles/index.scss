@@ -19,8 +19,13 @@ body {
   }
 }
 
-main {
+main.index-page {
   min-height: 45vh;
+  display: flex;
+  align-items: center;
+  & > .loader-container {
+    flex-grow: 1;
+  }
 }
 
 img {
@@ -241,6 +246,11 @@ ul.wineries {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  
+}
+
+.detail-loader {
+  padding: 12rem 0;
 }
 
 @import "./spinner";

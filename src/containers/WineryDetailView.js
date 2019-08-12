@@ -4,7 +4,6 @@ import Spinner from '../components/Spinner';
 
 require("dotenv").config();
 
-
 const WineryDetail = (props) => {
     const wineryId = props.match.params.wineryId;
     const [loading, setLoading] = useState(true)
@@ -27,12 +26,13 @@ const WineryDetail = (props) => {
       .catch(err => console.log(err));
 
     axios
-      .get(`https://cors-anywhere.herokuapp.com/${baseUrl}/reviews`, {
+      .get(`https://cors-anywhere.herokuapp.com/${baseUrl}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       })
       .then(resp => {
+        console.log(resp.data)
         setWineryReviews(resp.data)
         setLoading(false)
       })
@@ -44,13 +44,15 @@ const WineryDetail = (props) => {
   }, [])
 
   return (
-    <div>
+    <main>
       { loading ?
-        <Spinner />
+        <div className="loader-container detail-loader">
+          <Spinner />
+        </div>
         :
         <h1>{winery.name}</h1>
       }
-    </div>
+    </main>
   )
 }
 

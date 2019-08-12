@@ -8,7 +8,6 @@ import Spinner from "../components/Spinner";
 import Loader from "../components/Loader";
 import WineryList from "../components/WineryList"
 
-
 require("dotenv").config();
 
 const WineriesListView = () => {
@@ -18,13 +17,11 @@ const WineriesListView = () => {
   const [wineries, setWineries] = useState([]);
   const [wineriesCount, setWineriesCount] = useState(0);
   const [activePage, setActivePage] = useState(1);
-  const limit = 18;
+  const limit = 24;
 
-  
   const getWineries = async () => {
     const token = process.env.REACT_APP_YELP_API_KEY;
     const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=${limit}&offset=${offset}&location=${region.query}&term=wineries/`;
-    console.log("getting wineries")
     axios
       .get(`https://cors-anywhere.herokuapp.com/${baseUrl}`, {
         headers: {
@@ -63,10 +60,10 @@ const WineriesListView = () => {
   return (
     <div>
       <Header handleRegionChange={handleRegionChange}/>
-      <main>
+      <main className="index-page">
         {
           loading ?
-          <Spinner />
+          <div className="loader-container"><Spinner /></div>
           :
           <div className="wineries-list-container wrapper">
             <WineryList wineries={wineries} wineriesCount={wineriesCount}/>
