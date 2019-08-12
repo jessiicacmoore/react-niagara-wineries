@@ -57,7 +57,7 @@ const WineriesListView = () => {
   }
 
   useEffect(() => {
-    // getWineries();
+    getWineries();
   }, [region, offset]);
 
   return (

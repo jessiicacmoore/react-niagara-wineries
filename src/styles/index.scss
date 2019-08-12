@@ -21,13 +21,6 @@ body {
 
 main {
   min-height: 45vh;
-  display: grid;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
 img {
@@ -194,16 +187,9 @@ header {
 
 ul.wineries {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 2.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  grid-gap: 2rem;
   margin: 3rem 0;
-
-  @media screen and (max-width: 750px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media screen and (max-width: 500px) {
-    grid-template-columns: 1fr;
-  }
 
   li.winery {
     background-color: #fff;
@@ -230,6 +216,7 @@ ul.wineries {
       }
       .location {
         color: $mid-grey-clr;
+        margin: .5em 0;
       }
     }
 
