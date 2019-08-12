@@ -14,7 +14,7 @@ const Header = ({handleRegionChange}) => {
           <label htmlFor="region-select" ariaLabel="Select a location"><i class="fas fa-map-marker-alt"></i></label>
           <div className="custom-select">
             <select id="region-select" ref={regionEl}>
-              <option value="baseRegion">Niagara Region</option>
+              <option value="baseRegion" selected>Niagara Region</option>
               <option value="beamsville">Beamsville</option>
               <option value="jordanStn">Jordan Station</option>
               <option value="lincoln">Lincoln</option>
