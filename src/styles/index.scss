@@ -147,13 +147,13 @@ header {
       }
 
       select {
-        all: unset;
         -webkit-appearance: none;
            -moz-appearance: none;
                 appearance: none;
         background-color: $white;
         color: $dark-clr;
         border-radius: 3em;
+        border:none;
         padding: 1em 2em;
         text-align: center;
         @media screen and (max-width: 500px) {
