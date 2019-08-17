@@ -3,11 +3,12 @@ import { Waypoint } from 'react-waypoint';
 import Fade from 'react-reveal/Fade'
 import axios from "axios";
 
-import Header from "../components/Header"
+import SearchForm from "../components/SearchForm"
+import WineryCard from '../components/WineryCard'
 import Spinner from "../components/Spinner";
 import Loader from "../components/Loader";
-import WineryCard from '../components/WineryCard'
 import regions from "../data/regions"
+
 
 require("dotenv").config();
 
@@ -36,9 +37,11 @@ const WineriesListView = () => {
 
   const handleRegionChange = async (e, inputValue) => {
     e.preventDefault();
-    const newRegion = regions[inputValue];
-    setWineries([]);
-    setRegion(newRegion);
+    if (inputValue) {
+      const newRegion = regions[inputValue];
+      setWineries([]);
+      setRegion(newRegion);
+    }
   }
 
   useEffect(() => {
@@ -46,9 +49,14 @@ const WineriesListView = () => {
   }, [region]);
 
   return (
-    <div>
-      <Header handleRegionChange={handleRegionChange} />
+    <div className="list-view">
+      <header>
+        <div className="text-box">
+          <h1>Explore<br/><span>Niagara</span><br/>Wines.</h1>
+        </div>
+      </header>
       <main>
+        <SearchForm handleRegionChange={handleRegionChange}/>
         {
           wineries < 1 ?
           <div className="loader-container"><Spinner /></div>
