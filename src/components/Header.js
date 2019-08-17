@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import regions from '../data/regions'
 
 const Header = ({handleRegionChange}) => {
   const regionEl = useRef("baseRgion")
@@ -14,14 +15,9 @@ const Header = ({handleRegionChange}) => {
           <label htmlFor="region-select" aria-label="Select a location"><i className="fas fa-map-marker-alt"></i></label>
           <div className="custom-select">
             <select id="region-select" ref={regionEl}>
-              <option value="baseRegion">Niagara Region</option>
-              <option value="beamsville">Beamsville</option>
-              <option value="jordanStn">Jordan Station</option>
-              <option value="lincoln">Lincoln</option>
-              <option value="niagaraFalls">Niagara Falls</option>
-              <option value="notl">Niagara-On-The-Lake</option>
-              <option value="stCath">St. Catharines</option>
-              <option value="vineland">Vineland</option>
+              {
+                Object.keys(regions).map((key, i) =><option value={key}>{regions[key].name}</option>)
+              }
             </select>
             <i className="fas fa-chevron-down"></i>
           </div>

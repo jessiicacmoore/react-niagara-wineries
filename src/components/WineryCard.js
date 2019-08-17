@@ -14,11 +14,9 @@ export default function WineryCard({ winery }) {
           <h2 className="winery-name">{winery.name}</h2>
           <p className="location">Located in {winery.location.city}</p>
           <p className="rating">
-            <i className={`fas fa-star ${rating >= 1 ? 'fill' : ''}`}></i>
-            <i className={`fas fa-star ${rating >= 2 ? 'fill' : ''}`}></i>
-            <i className={`fas fa-star ${rating >= 3 ? 'fill' : ''}`}></i>
-            <i className={`fas fa-star ${rating >= 4 ? 'fill' : ''}`}></i>
-            <i className={`fas fa-star ${rating >= 5 ? 'fill' : ''}`}></i>
+            {
+              [...Array(5).keys()].map(starCount => <i className={`fas fa-star${rating >= (starCount + 1) ? ' fill' : ''}`} ></i>)
+            }
           </p>
         </div>
       </Link>

@@ -1,27 +1,24 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, {useEffect, useState} from "react";
 import { Waypoint } from 'react-waypoint';
+import Fade from 'react-reveal/Fade'
+import axios from "axios";
 
 import Header from "../components/Header"
-import regions from "../components/regions"
 import Spinner from "../components/Spinner";
 import Loader from "../components/Loader";
-import WineryList from "../components/WineryList"
+import WineryCard from '../components/WineryCard'
+import regions from "../data/regions"
 
 require("dotenv").config();
 
 const WineriesListView = () => {
-  const [loading, setLoading] = useState(true);
-  const [region, setRegion] = useState(regions.baseRegion);
-  const [offset, setOffset] = useState(0);
   const [wineries, setWineries] = useState([]);
-  const [wineriesCount, setWineriesCount] = useState(0);
-  const [activePage, setActivePage] = useState(1);
-  const limit = 24;
+  const [resultCount, setResultCount] = useState(0);
+  const [region, setRegion] = useState(regions.baseRegion);
 
   const getWineries = async () => {
     const token = process.env.REACT_APP_YELP_API_KEY;
-    const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=${limit}&offset=${offset}&location=${region.query}&term=wineries/`;
+    const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=24&offset=${wineries.length}&location=${region.query}&term=wineries/`;
     axios
       .get(`https://cors-anywhere.herokuapp.com/${baseUrl}`, {
         headers: {
@@ -29,52 +26,46 @@ const WineriesListView = () => {
         }
       })
       .then(resp => {
-        setWineriesCount(resp.data.total);
-        setLoading(false);
         const newData = resp.data.businesses;
         const prevData = wineries;
+        setResultCount(resp.data.total)
         setWineries([...prevData, ...newData])
       })
       .catch(err => console.log(err));
   };
 
-  const handleLoadMoreWineries = () => {
-    setOffset(activePage*limit);
-    setActivePage(activePage+1)
-  }
-
   const handleRegionChange = async (e, inputValue) => {
     e.preventDefault();
     const newRegion = regions[inputValue];
-    setLoading(true);
-    setOffset(0);
     setWineries([]);
-    setActivePage(1);
     setRegion(newRegion);
   }
 
   useEffect(() => {
     getWineries();
-  }, [region, offset]);
+  }, [region]);
 
   return (
     <div>
-      <Header handleRegionChange={handleRegionChange}/>
-      <main className="index-page">
+      <Header handleRegionChange={handleRegionChange} />
+      <main>
         {
-          loading ?
+          wineries < 1 ?
           <div className="loader-container"><Spinner /></div>
           :
           <div className="wineries-list-container wrapper">
-            <WineryList wineries={wineries} wineriesCount={wineriesCount}/>
-            {wineriesCount <= wineries.length ?
+            <ul className="wineries">
+              {
+                wineries.map((winery, i)=> <Fade><WineryCard key={winery.id} winery={winery} /></Fade>)
+              }
+            </ul>
+            {
+              wineries.length >= resultCount ?
               ""
-              : 
+              :
               <div className="loader-container">
-                <Waypoint onEnter={handleLoadMoreWineries}/>
-                <div className="loader-container">
-                  <Loader />
-                </div>
+                <Waypoint onEnter={getWineries}/>
+                <Loader />
               </div>
             }
           </div>

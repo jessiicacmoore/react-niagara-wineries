@@ -6,12 +6,10 @@ import WineryDetail from "./containers/WineryDetailView"
 
 function App() {
   return (
-    <div>
       <Router>
-        <Route path="/" exact component={WineriesListView} />
+        <Route path="/" exact component={WineriesListView}/>
         <Route path="/:wineryId" exact component={WineryDetail} />
       </Router>
-    </div>
   );
 }
 
