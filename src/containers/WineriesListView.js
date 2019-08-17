@@ -12,42 +12,7 @@ import regions from "../data/regions"
 
 require("dotenv").config();
 
-const WineriesListView = () => {
-  const [wineries, setWineries] = useState([]);
-  const [resultCount, setResultCount] = useState(0);
-  const [region, setRegion] = useState(regions.baseRegion);
-
-  const getWineries = async () => {
-    const token = process.env.REACT_APP_YELP_API_KEY;
-    const baseUrl = `https://api.yelp.com/v3/businesses/search?limit=24&offset=${wineries.length}&location=${region.query}&term=wineries/`;
-    axios
-      .get(`https://cors-anywhere.herokuapp.com/${baseUrl}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      .then(resp => {
-        const newData = resp.data.businesses;
-        const prevData = wineries;
-        setResultCount(resp.data.total)
-        setWineries([...prevData, ...newData])
-      })
-      .catch(err => console.log(err));
-  };
-
-  const handleRegionChange = async (e, inputValue) => {
-    e.preventDefault();
-    if (inputValue) {
-      const newRegion = regions[inputValue];
-      setWineries([]);
-      setRegion(newRegion);
-    }
-  }
-
-  useEffect(() => {
-    getWineries();
-  }, [region]);
-
+const WineriesListView = ({wineries, resultCount, getWineries, handleRegionChange}) => {
   return (
     <div className="list-view">
       <header>
