@@ -6,7 +6,7 @@ const SearchForm = ({handleRegionChange}) => {
   return (
     <div className="search-form">
       <h2>Narrow your results.</h2>
-      <form onSubmit={(e) => handleRegionChange(e, regionInput.current.value)}>
+      <form onSubmit={(e) => handleRegionChange(e, regionInput.current.value)} noValidate >
         <div className="custom-select">
           <label htmlFor="region-select" aria-label="Select a location"><i className="fas fa-map-marker-alt"></i></label>
           <select id="region-select" ref={regionInput} default="" required>
