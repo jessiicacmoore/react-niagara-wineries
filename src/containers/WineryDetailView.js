@@ -51,7 +51,7 @@ const WineryDetail = (props) => {
   }
 
   useEffect(() => {
-    getWineryDetails();
+    // getWineryDetails();
   }, [])
 
   return (
