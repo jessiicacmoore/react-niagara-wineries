@@ -25,3 +25,11 @@ class Pin(models.Model):
 
 	def __str__(self):
 		return f"{self.user} - {self.winery}"
+
+
+class Note(models.Model):
+	pin = models.ForeignKey(Pin, related_name="notes", on_delete=models.CASCADE)
+	date_added = models.DateField(auto_now_add=True)
+
+	def __str__(self):
+		return f"{self.pin} - {self.date_added}"
