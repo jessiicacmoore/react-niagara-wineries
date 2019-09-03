@@ -19,3 +19,9 @@ class Pin(models.Model):
 	user = models.ForeignKey(User, related_name="pins", on_delete=models.CASCADE)
 	winery = models.ForeignKey(Winery, related_name="pins", on_delete=models.CASCADE)
 	visited = models.BooleanField(default=False)
+
+	class Meta:
+		unique_together = ('user', 'winery')
+
+	def __str__(self):
+		return f"{self.user} - {self.winery}"
