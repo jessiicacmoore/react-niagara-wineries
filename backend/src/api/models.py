@@ -17,5 +17,5 @@ class Winery(models.Model):
 
 class Pin(models.Model):
 	user = models.ForeignKey(User, related_name="pins", on_delete=models.CASCADE)
-	winery = models.ForeignKey(User, related_name="pins", on_delete=models.CASCADE)
+	winery = models.ForeignKey(Winery, related_name="pins", on_delete=models.CASCADE)
 	visited = models.BooleanField(default=False)
