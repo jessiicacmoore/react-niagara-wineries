@@ -13,3 +13,9 @@ class Winery(models.Model):
 
 	def __repr__(self):
 		return self.name
+
+
+class Pin(models.Model):
+	user = models.ForeignKey(User, related_name="pins", on_delete=models.CASCADE)
+	winery = models.ForeignKey(User, related_name="pins", on_delete=models.CASCADE)
+	visited = models.BooleanField(default=False)
