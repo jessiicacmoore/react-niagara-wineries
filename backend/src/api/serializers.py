@@ -24,7 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
         return {"refresh": str(refresh), "access": str(refresh.access_token)}
 
     def create(self, validated_data):
-        user = super(UserSerializerWithToken, self).create(validated_data)
+        user = super(UserSerializer, self).create(validated_data)
         user.set_password(validated_data["password"])
         user.save()
         return user
